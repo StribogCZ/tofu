@@ -1,22 +1,40 @@
 terraform {
   required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 3.0"
+    proxmox = {
+      source  = "Telmate/proxmox"
+      version = "~> 2.9"
     }
   }
 
   required_version = ">= 0.12"
 }
 
-provider "aws" {
-  region = "us-east-1"
+provider "proxmox" {
+  pm_api_url      = "https://192.168.88.106:8006/api2/json"
+  pm_user         = "root@pam"
+  pm_password     = "pve_pass"
+  pm_tls_insecure = true
 }
 
-module "example" {
-  source = "./modules/example"
+resource "proxmox_vm_qemu" "cloned_vm" {
+  name       = "cloned-vm"
+  target_node = "proxmox-node"
+  clone      = "101"
+
+  disks {
+    disk_size = "10G"
+  }
+
+  network {
+    model  = "virtio"
+    bridge = "vmbr0"
+  }
+
+  cores   = 2
+  memory  = 2048
+  sockets = 1
 }
 
-output "example_output" {
-  value = module.example.output_value
+output "vm_id" {
+  value = proxmox_vm_qemu.cloned_vm.id
 }

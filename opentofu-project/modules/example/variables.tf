@@ -1,4 +1,4 @@
-variable "example_variable" {
+variable "pve_pass" {
   type    = string
   default = "default_value"
 }
