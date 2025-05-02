@@ -1,6 +1,6 @@
 variable "pve_pass" {
   type    = string
-  default = "Passw0rd0"
+  default = "Houska2023"
   sensitive = true
 }
 

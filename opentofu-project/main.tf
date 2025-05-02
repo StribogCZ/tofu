@@ -9,6 +9,7 @@ terraform {
   required_version = ">= 0.12"
 }
 
+
 provider "proxmox" {
   pm_api_url      = "https://192.168.88.106:8006/api2/json"
   pm_user         = "root@pam"
@@ -17,8 +18,8 @@ provider "proxmox" {
 }
 
 resource "proxmox_vm_qemu" "cloned_vm" {
-  name       = "cloned-vm"
-  target_node = "proxmox-node"
+  name       = "Deb12-template"
+  target_node = "pve"
   clone      = "101"
 
   disk {

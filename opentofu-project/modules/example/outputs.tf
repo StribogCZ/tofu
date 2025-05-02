@@ -1,3 +1,4 @@
-output "example_output" {
-  value = "This is an example output value"
+output "pve_pass" {
+  value     = var.pve_pass
+  sensitive = true
 }
