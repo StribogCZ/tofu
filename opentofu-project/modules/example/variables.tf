@@ -1,6 +1,6 @@
 variable "pve_pass" {
   type    = string
-  default = "default_value"
+  default = "Passw0rd0"
 }
 
 variable "example_count" {
