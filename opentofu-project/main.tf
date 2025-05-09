@@ -1,44 +1,100 @@
+# Provider configuration (provider.tf)
 terraform {
   required_providers {
     proxmox = {
-      source  = "Telmate/proxmox"
-      version = "~> 2.9"
+      source = "telmate/proxmox"
+      version = "3.0.1-rc4"
     }
   }
-
-  required_version = ">= 0.12"
 }
-
 
 provider "proxmox" {
-  pm_api_url      = "https://192.168.88.106:8006/api2/json"
-  pm_user         = "root@pam"
-  pm_password     = "${var.pve_pass}"
+  pm_api_url = "https://192.168.88.106:8006/api2/json"
+#  username and password options for security
+#  pm_user    = "root@pam"
+#  pm_password = "YourPasswordHere"
+
+  # insecure unless using signed certificates
   pm_tls_insecure = true
+  
+  # api token id is in the form of: <username>@pam!<tokenId>
+  pm_api_token_id = "root@pam!tofu"
+
+  # this is the full secret wrapped in quotes:
+  pm_api_token_secret = "d4e05ac1-36ed-45b8-be44-d6f0c488c728"
+
 }
 
-resource "proxmox_vm_qemu" "cloned_vm" {
-  name       = "Deb12-template"
-  target_node = "pve"
-  clone      = "101"
+resource "proxmox_vm_qemu" "cloudinit-test" {
+    name = "terraform-test-vm"
+    desc = "A test for using terraform and cloudinit"
 
-  disk {
-    size     = "10G"
-    type     = "scsi"
-    storage  = "Drives"
-    iothread = 0
-  }
+    # Node name has to be the same name as within the cluster
+    # this might not include the FQDN
+    target_node = "pve"
 
-  network {
-    model  = "virtio"
-    bridge = "vmbr0"
-  }
+    # The destination resource pool for the new VM
+#    pool = "pool0"
 
-  cores   = 2
-  memory  = 2048
-  sockets = 1
-}
+    # The template name to clone this vm from
+    clone = "deb12-tpl"
 
-output "vm_id" {
-  value = proxmox_vm_qemu.cloned_vm.id
+    # Activate QEMU agent for this VM
+    agent = 1
+
+    os_type = "cloud-init"
+    cores = 2
+    sockets = 1
+    vcpus = 0
+    cpu = "host"
+    memory = 2048
+    scsihw = "virtio-scsi-pci"
+
+    # Setup the disk
+    disks {
+        ide {
+            ide2 {
+                cloudinit {
+                    storage = "Drives"
+                }
+            }
+        }
+        scsi {
+            scsi0 {
+                disk {
+                    size            = 32
+                    cache           = "writeback"
+                    storage         = "Drives"
+                    #storage_type    = "rbd"
+                    #iothread        = true
+                    discard         = true
+                    replicate       = true
+                }
+            }
+        }
+    }
+
+    # Setup the network interface and assign a vlan tag: 256
+    network {
+        model = "virtio"
+        bridge = "vmbr0"
+        #tag = 256
+    }
+
+    # Setup the ip address using cloud-init.
+    boot = "order=scsi0"
+    # Keep in mind to use the CIDR notation for the ip.
+    #ipconfig0 = "ip=192.168.10.20/24,gw=192.168.10.1"
+    ipconfig0 = "ip=dhcp"
+    #sshkeys = <<EOF
+    #ssh-rsa 9182739187293817293817293871== user@pc
+    #EOF
+    serial {
+      id   = 0
+      type = "socket"
+    }
+    
+    ciuser = "debian"
+    cipassword = "debian"
+
 }

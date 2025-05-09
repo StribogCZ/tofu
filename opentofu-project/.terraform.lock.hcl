@@ -1,24 +1,25 @@
 # This file is maintained automatically by "tofu init".
 # Manual edits may be lost in future updates.
 
-provider "registry.opentofu.org/telmate/proxmox" {
-  version     = "2.9.14"
-  constraints = "~> 2.9"
+provider "registry.opentofu.org/bpg/proxmox" {
+  version     = "0.77.0"
+  constraints = ">= 0.77.0"
   hashes = [
-    "h1:H/f+LbVyPOLslHLAYnGuMMRqWFZ65K6E3V+MCYgfAyk=",
-    "zh:0d049d33f705e5b814d30028770c084151218439424e99684ce31d7e26a720b5",
-    "zh:20b1c64ed56d81de95f3f37b82b45b4654c0de26670c0e87a474c5cce13cd015",
-    "zh:2946058abd1d8e50e475b9ec39781eb02576b40dbd80f4653fade4493a4514c6",
-    "zh:29e50a25c456f040ce072f23ac57b5b82ebd3b916ca5ae6688332b5ec62adc4a",
-    "zh:3612932306ce5f08db94868f526cbb8c56d0d3c6ebe1c11a83f92bbf94354296",
-    "zh:42d1699b0abebaac82ea5a19f4393541d8bb2741bde204a8ac1028cdc29d1b14",
-    "zh:5ffd5dc567262eb8aafdf2f6eac63f7f21361da9c5d75a3c36b479638a0001b0",
-    "zh:6692ef323e3b89de99934ad731f6a1850525bf8142916ae28ea4e4048d73a787",
-    "zh:a5afc98e9a4038516bb58e788cb77dea67a60dce780dfcd206d7373c5a56b776",
-    "zh:bf902cded709d84fa27fbf91b589c241f2238a6c4924e4e479eebd74320b93a5",
-    "zh:cab0e1e72c9cebcf669fc6f35ec28cb8ab2dffb0237afc8860aa40d23bf8a49f",
-    "zh:e523b99a48beec83d9bc04b2d336266044f9f53514cefb652fe6768611847196",
-    "zh:f593915e8a24829d322d2eaeedcb153328cf9042f0d84f66040dde1be70ede04",
-    "zh:fba1aff541133e2129dfda0160369635ab48503d5c44b8407ce5922ecc15d0bd",
+    "h1:TWQ5oJu/ViqcdOpKGtv/ERRUOa6hmn2rbjiotmFPqS0=",
+    "zh:02dc7285fd0e7226f4e1cd572f7facdc904c23121de40f8d1c989b0a8daaaa1c",
+    "zh:1fd3d2bf0a31a4c8234f5a3ca7c04069756ec12efc50065a77d86896084540e8",
+    "zh:3967e2b7a21c13368914422cdef9e21635cbe2acd8659d9ab57290f971fceede",
+    "zh:3bd6341849e15f79690255fcb6b27d1bc11e221142ea3d82dda7d8f563af5053",
+    "zh:5af1fb53fa5e08c9fba4d1bf23222edfbdaf6e18a808964ccb231e8527ae97f6",
+    "zh:5edc3f1c7a886d13465541bff72c6e55be3a8677f36efa824ed3d287ad0b932c",
+    "zh:688c87d163e11e9cc84768416e74dcd91067d416ef251e8090fed0618023e230",
+    "zh:6c1be886774aef59e5555d617011327c68293b2c80fdc6fde495c2d36893ab54",
+    "zh:7373e076939cb28e95c90d7a9af9862cc0927dfc4a08e72f6d2e7567d4ac259d",
+    "zh:90533ca55827b6fe41623b15555b4a23e6367786b4e30ce7d189402405a50576",
+    "zh:bcea26b0dd4cae38b2b5e5d36bd3dc3fc88b5e435bba284810387cf18fd7102d",
+    "zh:c6db39353c00f400b50b6a91d3bf6624f827f75b8bcc55adfb59a01807b3dcde",
+    "zh:da054566de87af779e95b98ab4c00a6991be5649fcde50888a08a04ae7d7be32",
+    "zh:eaab1cff16c8955f2564c91a3a4365f4823db479765161b4e7533c17d5413f59",
+    "zh:f26e0763dbe6a6b2195c94b44696f2110f7f55433dc142839be16b9697fa5597",
   ]
 }
