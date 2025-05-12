@@ -21,7 +21,7 @@ provider "proxmox" {
   pm_api_token_id = "root@pam!tofu"
 
   # this is the full secret wrapped in quotes:
-  pm_api_token_secret = "d4e05ac1-36ed-45b8-be44-d6f0c488c728"
+  pm_api_token_secret = "4f633618-2810-404c-a623-cd823664abc2"
 
 }
 
