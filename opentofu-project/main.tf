@@ -9,7 +9,7 @@ terraform {
 }
 
 provider "proxmox" {
-  pm_api_url = "https://192.168.88.106:8006/api2/json"
+  pm_api_url = "https://192.168.191.106:8006/api2/json"
 #  username and password options for security
 #  pm_user    = "root@pam"
 #  pm_password = "YourPasswordHere"
